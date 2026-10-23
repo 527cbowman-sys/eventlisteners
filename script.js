@@ -8,20 +8,33 @@ function render (html) {
 -------------------------------- */
 let clickCount = 0
 
+document.getElementById('btnClick').addEventListener('click', () => {
+  clickCount++
+  render(`<p>Button clicked <strong>${clickCount}</strong> time${clickCount === 1 ? '' : 's'}.</p>`)
+})
 
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
+const dblCard = document.getElementById('dblCard') 
+
+dblCard.addEventListener('dblclick', () => {
+   dblCard.classList.toggle('activated')
+   const state = dblCard.classList.contains('activated') ? 'ON' : 'OFF'
+   render(`<p>Double-clicked! Highlight is <strong>${state}</strong>.</p>`)
+})
 
 
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
+const kbKey = document.getElementById('kbKey')
+const kbCode = document.getElementById('kbCode')
 
-
-/* ----------------------------------------
-   Demo 4: Show Time (12-hour format + day)
------------------------------------------ */
+document.addEventListener('keydown', e => {
+   kbKey.textContent = e.key === ' ' ? '(space)' : e.key
+   kbCode.textContent = e.code
+})
 
 
 /* -------------------------
@@ -55,3 +68,31 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
+
+const hoverCard = document.getElementById('hoverCard')
+let hoverCount  = 0
+
+document.getElementById('hoverCard').addEventListener('mouseenter', () => {
+  hoverCount++
+  hoverCard.classList.add('activated')
+  render(`<p>Hovered <strong>${hoverCount}</strong> time${hoverCount === 1 ? '' : 's'}.</p>`)
+})
+
+document.getElementById('hoverCard').addEventListener('mouseleave', () => {
+  hoverCard.classList.remove('activated')
+  render('<p>Mouse left the card.</p>')
+})
+
+
+
+const inputMirror = document.getElementById('inputMirror')
+
+inputMirror.addEventListener('input', e => {
+   const value = e.target.value
+   if (value) {
+      render(`<p>You typed: <strong>${value}</strong></p>`)
+   } else {
+      render('<p class="text-secondary">Type something in the input above.</p>')
+   } 
+})
+
