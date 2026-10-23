@@ -85,14 +85,32 @@ document.getElementById('hoverCard').addEventListener('mouseleave', () => {
 
 
 
+
 const inputMirror = document.getElementById('inputMirror')
 
 inputMirror.addEventListener('input', e => {
-   const value = e.target.value
-   if (value) {
-      render(`<p>You typed: <strong>${value}</strong></p>`)
-   } else {
-      render('<p class="text-secondary">Type something in the input above.</p>')
-   } 
+  const value = e.target.value
+  if (value) {
+    render(`<p>You typed: <strong>${value}</strong></p>`)
+  } else {
+    render('<p class="text-secondary">Type something in the input above.</p>')
+  }
+})
+
+// When the input is focused
+inputMirror.addEventListener('focus', () => {
+  inputMirror.classList.add('border', 'shadow')
+})
+
+// When the input loses focus
+inputMirror.addEventListener('blur', () => {
+  inputMirror.classList.remove('border', 'shadow')
+
+  const value = inputMirror.value
+  if (value) {
+    render(`<p>You typed: <strong>${value}</strong></p>`)
+  } else {
+    render('<p class="text-secondary">Type something in the input above.</p>')
+  }
 })
 

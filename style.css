@@ -99,3 +99,12 @@ header{
 }
 
 
+
+#inputMirror:focus {
+  border: 2px solid #de8af3 !important;
+  box-shadow: 0 0 0 0.25rem #ddc1e0 !important;
+  outline: none !important;
+}
+
+
+
